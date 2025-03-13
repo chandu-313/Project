@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Monthly Achievements</title>
+    <link rel="stylesheet" href="style.css">
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.achievements {
+    margin-top: 20px;
+}
+
+p {
+    font-size: 16px;
+    color: #555;
+    margin-bottom: 20px;
+}
+
+</style>
+<body>
+    <div class="container">
+        <h1>Your Achievements</h1>
+        <div class="achievements">
+            <p id="achievement-details">This month you achieved 70% of your sales target.</p>
+            <canvas id="salesChart" width="400" height="200"></canvas>
+        </div>
+    </div>
+    <script src="script.js">
+        // Example data for the chart
+const thisMonthSales = 35000; // Sales made this month
+const lastMonthSales = 30000; // Sales made last month
+
+// Create the chart
+const ctx = document.getElementById('salesChart').getContext('2d');
+const salesChart = new Chart(ctx, {
+    type: 'bar',
+    data: {
+        labels: ['Last Month', 'This Month'],
+        datasets: [{
+            label: 'Sales ($)',
+            data: [lastMonthSales, thisMonthSales],
+            backgroundColor: ['#ff6384', '#36a2eb'],
+            borderColor: ['#ff6384', '#36a2eb'],
+            borderWidth: 1
+        }]
+    },
+    options: {
+        scales: {
+            y: {
+                beginAtZero: true
+            }
+        }
+    }
+});
+
+    </script>
+</body>
+</html>

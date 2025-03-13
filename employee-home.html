@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Home</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+button {
+    padding: 15px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+</style>
+<body>
+  <div class="container">
+    <h1>Welcome, Employee</h1>
+    <div class="options">
+      <button><a href="employeeprofile.html">Profile</a></button>
+      <button><a href="sales-target.html">Sales Target</a></button>
+      <button><a href="monthly-achievements.html">Monthly Achievements</a></button>
+    </div>
+  </div>
+  <script src="script.js">
+    function navigateTo(page) {
+    window.location.href = page;
+}
+function Profile() {
+    window.location.href = 
+      https;//cdpn.io/pen/debug/PorKzMj?authentication_hash=bZAQWpWyPGQM;
+}
+function SalesTarget() {
+    window.location.href = 
+     https;//cdpn.io/pen/debug/jOjLMOp?authentication_hash=yYMyLeVEjedk
+}
+function MonthlyAchievements() {
+    window.location.href = 
+     https;//cdpn.io/pen/debug/eYwEdmX?authentication_hash=LQAExWxPJwqr;
+}
+window.onload = () => {
+    const employeeID = sessionStorage.getItem('loggedInEmployeeId'); // Ensure this is set during login
+    if (employeeID) {
+        loadEmployeeProfile(employeeID);
+    } else {
+        alert("No employee ID found. Please log in first.");
+    }
+};
+
+
+  </script>
+</body>
+</html>

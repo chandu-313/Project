@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sales Target</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #f0f0f0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        margin: 0;
+    }
+    
+    .container {
+        background-color: white;
+        padding: 30px;
+        border-radius: 10px;
+        box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+        max-width: 600px;
+        width: 100%;
+        text-align: center;
+    }
+    
+    h1 {
+        color: #333;
+        margin-bottom: 20px;
+    }
+    
+    .sales-target-info p {
+        font-size: 18px;
+        color: #555;
+        margin: 10px 0;
+    }
+    
+    #admin-controls {
+        margin-top: 20px;
+        border-top: 1px solid #ddd;
+        padding-top: 20px;
+    }
+    
+    #admin-controls.hidden {
+        display: none;
+    }
+    
+    form {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+    
+    label {
+        font-size: 14px;
+        margin-bottom: 5px;
+        color: #555;
+    }
+    
+    input[type="number"] {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 15px;
+        border: 1px solid #ddd;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+    
+    button {
+        padding: 10px 20px;
+        background-color: #4CAF50;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+    
+    button:hover {
+        background-color: #45a049;
+    }
+    
+</style>
+<body>
+    <div class="container">
+        <h1>Your Sales Target</h1>
+        <div class="sales-target-info">
+            <p id="sales-target">Sales Target for this Month: $0</p>
+            <p id="sales-achievement">Current Sales: $0</p>
+        </div>
+    </div>
+    <script src="script.js">
+        function updateSalesData(event) {
+    event.preventDefault();
+
+    const employeeId = sessionStorage.getItem('loggedInEmployeeId');
+    const employees = JSON.parse(localStorage.getItem('employees')) || [];
+    const employee = employees.find(emp => emp.id === employeeId);
+
+    if (employee) {
+        const newTarget = document.getElementById('new-target').value;
+        const newAchievement = document.getElementById('new-achievement').value;
+
+        employee.salesTarget = newTarget;
+        employee.currentSales = newAchievement;
+
+        // Update in localStorage
+        localStorage.setItem('employees', JSON.stringify(employees));
+
+        // Update the DOM
+        document.getElementById('sales-target').textContent = `Sales Target for this Month: $${newTarget}`;
+        document.getElementById('sales-achievement').textContent = `Current Sales: $${newAchievement}`;
+    }
+}
+
+document.getElementById('update-form').addEventListener('submit', updateSalesData);
+
+    </script>
+</body>
+</html>

@@ -1,0 +1,115 @@
+<!-- Employee Profile Page (with dynamic data loading) -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Employee Profile</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    max-width: 600px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.employee-profile {
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+#employee-pic {
+    width: 150px;
+    height: 150px;
+    border-radius: 50%;
+    object-fit: cover;
+    margin-bottom: 15px;
+}
+
+h2 {
+    font-size: 24px;
+    color: #333;
+    margin: 10px 0;
+}
+
+p {
+    font-size: 16px;
+    color: #555;
+}
+
+</style>
+<body>
+  <div class="container">
+    <h1>Your Profile</h1>
+    <div class="employee-profile">
+      <img src="" alt="Employee Picture" id="employee-pic">
+      <h2 id="employee-name-display"></h2>
+      <p id="employee-role">Role:</p>
+      <p id="employee-years">Years in Company:</p>
+      <p id="employee-location">Location:</p>
+      <p id="employee-sales">Overall Sales: $<span id="sales-amount">0</span></p>
+    </div>
+  </div>
+  <script src="script.js">
+    function loadEmployeeProfile() {
+    const employeeId = sessionStorage.getItem('loggedInEmployeeId');
+    if (!employeeId) {
+        alert("No employee logged in. Redirecting to login page.");
+        window.location.href = "login.html"; // Redirect if no employee is logged in
+        return;
+    }
+
+    let employees = JSON.parse(localStorage.getItem('employees')) || [];
+    const employee = employees.find(emp => emp.id === employeeId);
+
+    console.log("Loaded Employee ID:", employeeId);
+    console.log("All Employees Data:", employees);
+    console.log("Found Employee:", employee);
+
+    if (employee) {
+        document.getElementById('employee-name-display').innerText = employee.name;
+        document.getElementById('employee-role').innerText = 'Role: ' + employee.role;
+        document.getElementById('employee-years').innerText = 'Years in Company: ' + employee.years;
+        document.getElementById('employee-location').innerText = 'Location: ' + employee.location;
+        document.getElementById('sales-amount').innerText = employee.sales;
+
+        // Check if image exists
+        if (employee.pic) {
+            document.getElementById('employee-pic').src = "uploads/" + employee.pic;
+        } else {
+            document.getElementById('employee-pic').src = "default-avatar.png"; // Fallback image
+        }
+    } else {
+        alert("Employee profile not found!");
+        window.location.href = "login.html"; // Redirect if employee not found
+    }
+}
+
+window.onload = loadEmployeeProfile;
+
+
+  </script>
+</body>
+</html>

@@ -1,0 +1,133 @@
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Add Employee</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<style>
+    body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+.container {
+    background-color: white;
+    padding: 30px;
+    border-radius: 10px;
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    max-width: 400px;
+    width: 100%;
+    text-align: center;
+}
+
+h1 {
+    color: #333;
+    margin-bottom: 20px;
+}
+
+label {
+    display: block;
+    font-size: 14px;
+    margin-bottom: 5px;
+    color: #555;
+}
+
+input[type="text"],
+input[type="number"],
+input[type="file"] {
+    width: 100%;
+    padding: 10px;
+    margin-bottom: 15px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+    font-size: 14px;
+}
+
+button {
+    width: 100%;
+    padding: 10px;
+    background-color: #4CAF50;
+    color: white;
+    border: none;
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
+}
+
+button:hover {
+    background-color: #45a049;
+}
+
+#employee-id-container {
+    margin-top: 20px;
+}
+
+#employee-id {
+    font-weight: bold;
+    color: #4CAF50;
+}
+
+</style>
+<body>
+    <div class="container">
+        <h1>Add Employee</h1>
+        <form id="employee-form" onsubmit="addEmployee(event)">
+            <label for="employee-name">Employee Name:</label>
+            <input type="text" id="employee-name" required><br>
+
+            <label for="years">Years in Company:</label>
+            <input type="number" id="years" required><br>
+
+            <label for="role">Employee Role:</label>
+            <input type="text" id="role" required><br>
+
+            <label for="location">Location:</label>
+            <input type="text" id="location" required><br>
+
+            <label for="employee-pic">Picture:</label>
+            <input type="file" id="employee-pic" accept="image/*" required><br>
+
+            <label for="employee-sales">Sales Made:</label>
+            <input type="number" id="employee-sales" required><br>
+
+            <button type="submit">Add Employee</button>
+        </form>
+    </div>
+    <script>
+        function addEmployee(event) {
+    event.preventDefault();
+
+    const employeeID = 'EMP' + Date.now();
+
+    const employee = {
+
+  id: employeeID,
+        name: document.getElementById("employee-name").value,
+        years: document.getElementById("years").value,
+        role: document.getElementById("role").value,
+        location: document.getElementById("location").value,
+        pic: document.getElementById("employee-pic").files[0]?.name || "", // Handle missing image
+        sales: document.getElementById("employee-sales").value,
+        email: document.getElementById("employee-email").value, // Store email
+        password: document.getElementById("employee-password").value // Store password
+    };
+
+    let employees = JSON.parse(localStorage.getItem('employees')) || [];
+    employees.push(employee);
+    localStorage.setItem('employees', JSON.stringify(employees));
+
+    alert("Employee added successfully! Employee ID: " + employeeID);
+    document.getElementById("employee-form").reset();
+}
+
+    </script>
+</body>
+</html>
