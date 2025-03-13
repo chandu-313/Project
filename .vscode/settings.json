@@ -1,0 +1,45 @@
+{
+    "sqltools.connections": [
+        {
+            "mysqlOptions": {
+                "authProtocol": "xprotocol",
+                "enableSsl": "Disabled"
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 33060,
+            "driver": "MySQL",
+            "name": "SQL",
+            "database": "sql",
+            "username": "cnv313",
+            "password": "1234567890"
+        },
+        {
+            "connectionTimeout": 15,
+            "mssqlOptions": {
+                "appName": "SQLTools",
+                "useUTC": true,
+                "encrypt": true,
+                "trustServerCertificate": false
+            },
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 1433,
+            "driver": "MSSQL",
+            "name": "SQL Server",
+            "database": "sql2",
+            "username": "cnv313",
+            "password": "1234567890"
+        },
+        {
+            "previewLimit": 50,
+            "server": "localhost",
+            "port": 5432,
+            "driver": "PostgreSQL",
+            "name": "Postgress",
+            "database": "sql3",
+            "username": "cnv313",
+            "password": "123456789"
+        }
+    ]
+}
